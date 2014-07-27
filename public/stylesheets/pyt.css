@@ -1,0 +1,15 @@
+body{
+	width:980px;
+	margin:0 auto;
+}
+
+header h1{
+	margin:0px;
+	border-bottom: 1px dotted #ccc;
+}
+
+.site-logo{
+	width: 74px;
+	height: 65px;
+	display: inline-block;
+}

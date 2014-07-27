@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+	h3 User Listing
+
+	input(type='button btn-primary',class="btn btn-primary pull-right", value='Add a new record', onclick="window.location.href='/users/create';")
+	div(style='clear:both')
+	<br>
+
+
+	form#list-form
+		table#list.table.table-condensed.table-hover.table-bordered.table-striped
+			thead
+				tr
+					th #
+					th First Name
+					th Last Name
+					th Password
+					th User Name
+					th Phone Number
+					th Email
+					th Actions
+
+			tbody
+				if records && records.length > 0
+					each rec in records
+						tr
+							td #{rec.id}
+							td #{rec.firstname}
+							td #{rec.lastname}
+							td #{rec.password}
+							td #{rec.username}
+							td #{rec.phonenumber}
+							td #{rec.email}
+							td
+								a(href='/users/delete/#{rec.id}') Delete 
+								span &nbsp;|&nbsp;&nbsp;
+								a(href='/users/update/#{rec.id}') Edit
+
+				else
+					tr
+						td(class='list-norecs', colspan='8') There are currently no records of this type.
+			

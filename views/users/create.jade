@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+	h3 Create New User
+	form(role='form' method='post' action='/users/save' )
+		.form-group
+			label(for='firstname') First Name
+			input(type='text',class='form-control',id='firstname',placeholder='First Name',name='firstname')
+		.form-group
+			label(for='lastname') Last Name
+			input(type='text',class='form-control',id='lastname',placeholder='Last Name',name='lastname')
+		.form-group
+			label(for='password') Password
+			input(type='password',class='form-control',id='password',placeholder='Password',name='password')
+		.form-group
+			label(for='username') Username
+			input(type='text',class='form-control',id='username',placeholder='Username',name='username')
+		.form-group
+			label(for='phonenumber') Phonenumber
+			input(type='text',class='form-control',id='phonenumber',placeholder='Phonenumber',name='phonenumber')
+		.form-group
+			label(for='email') Email
+			input(type='email',class='form-control',id='email',placeholder='Email',name='email')
+
+		<button type="submit" class="btn btn-primary">Submit</button>
+		&nbsp;&nbsp;
+		a(href='/users/list') Cancel
