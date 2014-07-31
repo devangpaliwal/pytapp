@@ -1,4 +1,19 @@
-extends layout
+extends ../layout
 
 block content
-	Update Trip
+	h3 Update Trip
+	if message
+		div.alert.alert-danger #{message}
+	form(role='form' method='post' action='/trips/save/#{trip.id}' )
+		.form-group
+			label(for='tripname') Trip Name
+			input(type='text',value='#{trip.tripname}',class='form-control',id='tripname',placeholder='Trip Name',name='tripname')
+		.form-group
+			label(for='tripurl') Trip Url
+			input(type='text',value='#{trip.tripurl}',class='form-control',id='tripurl',placeholder='Trip Url',name='tripurl')
+		.form-group
+			label(for='user_id') User Id
+			input(type='text',value='#{trip.user_id}',class='form-control',id='user_id',placeholder='User Id',name='user_id')
+		<button type="submit" class="btn btn-primary">Submit</button>
+		&nbsp;&nbsp;
+		a(href='/trips/list') Cancel

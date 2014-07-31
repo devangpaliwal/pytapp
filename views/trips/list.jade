@@ -1,4 +1,38 @@
-extends layout
+extends ../layout
 
 block content
-	All Trip
+	h3 Trip Listing
+
+	input(type='button btn-primary',class="btn btn-primary pull-right", value='Add a new record', onclick="window.location.href='/trips/create';")
+	div(style='clear:both')
+	<br>
+
+
+	form#list-form
+		table#list.table.table-condensed.table-hover.table-bordered.table-striped
+			thead
+				tr
+					th #
+					th Trip Name
+					th Trip URL
+					th Timestamp
+					th Userid
+					th Actions
+
+			tbody
+				if records && records.length > 0
+					each rec in records
+						tr
+							td #{rec.id}
+							td #{rec.tripname}
+							td #{rec.tripurl}
+							td #{rec.timestamp}
+							td #{rec.user_id}
+							td
+								a(href='/trips/delete/#{rec.id}') Delete 
+								span &nbsp;|&nbsp;&nbsp;
+								a(href='/trips/update/#{rec.id}') Edit
+
+				else
+					tr
+						td(class='list-norecs', colspan='8') There are currently no records of this type.

@@ -9,6 +9,17 @@ html(lang='en')
 		header
 			h1.pull
 				img(src='/images/pyt.png', height='70px')
-
+				span.pull-right
+					a(href="/changepass" style="font-size:14px") Change Password
+					&nbsp;&nbsp;
+					a(href="/logout" style="font-size:14px") Log Out
+			ul.nav.nav-pills
+				li
+					a(href="/users/list") 
+						strong Users
+				li
+					a(href="/trips/list") 
+						strong Trips	
+			
 		#content
 			block content

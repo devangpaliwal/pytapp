@@ -1,4 +1,19 @@
-extends layout
+extends ../layout
 
 block content
-	Create New User
+	if message
+		div.alert.alert-danger #{message}
+	h3 Create New Trip
+	form(role='form' method='post' action='/trips/save' )
+		.form-group
+			label(for='tripname') Trip Name
+			input(type='text',class='form-control',id='tripname',placeholder='Trip Name',name='tripname')
+		.form-group
+			label(for='tripurl') Trip Url
+			input(type='text',class='form-control',id='tripurl',placeholder='Trip Url',name='tripurl')
+		.form-group
+			label(for='user_id') User Id
+			input(type='text',class='form-control',id='user_id',placeholder='User Id',name='user_id')
+		<button type="submit" class="btn btn-primary">Submit</button>
+		&nbsp;&nbsp;
+		a(href='/trips/list') Cancel

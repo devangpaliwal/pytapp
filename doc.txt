@@ -1,0 +1,89 @@
+Change Password API:
+=====================================================
+endpoint : /ajax/changepassajax
+method : post
+
+expects : 
+1] username
+2] oldpassword - md5ied
+3] newpassword - md5ied
+4] retypepassword - md5ied
+
+
+results:
+
+Case : New password and retypepassword do not match
+{
+	"status":"error",
+	"code": "301",
+	"message":"New password and retypepassword do not match"
+}
+
+Case: Old password does not match the one existing in db
+{
+	"status":"error",
+	"code": "302",
+	"message":"Users password does not match"
+}
+
+
+Case: User not found
+{
+	"status":"error",
+	"code": "303",
+	"message":"Unable to change password. No user found with name "+req.body.username
+}
+
+Case: 
+{
+	"status":"success",
+	"message":"Password changed Successfully"
+}
+=======================================================
+
+
+
+Trip Url API
+=====================================================
+endpoint : /ajax/gettripurl
+method : post
+
+
+expects
+1] username
+2] password
+3] tripid  (optional)
+
+Case:
+{
+	"status":"error",
+	"code" : 102,
+	"message" : "Password does not match"
+}
+
+Case:
+{
+	"status":'error',
+	'code':'106',
+	'message':"User does not have any trip"
+}
+
+Case: When tripid is provided and it does not exist
+{
+	"status":'error',
+	'code':'105',
+	'message':"Trip does not exist"
+}
+
+Case:
+{
+	"status":"error",
+	"code" : 101,
+	"message" : "User does not exist"
+}
+
+Case:
+{
+	"status":'success',
+	'url':'acb.com/riploremipsum'
+}
