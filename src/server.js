@@ -68,7 +68,7 @@ app.all("*",function(req, res, next) {
 });
 
 var routes = require('../routes')(app , passport);
-console.log(routes);
+//console.log(routes);
 
 
 app.get('/', routes.pytauth.login);

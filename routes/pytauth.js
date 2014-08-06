@@ -144,9 +144,15 @@ module.exports = function(app,passport){
 							'message':"User does not have any trip"
 						});
 					}
+
+					var latestTrip = trips.at(trips.length-1);
+
 					res.json({
 						"status":'success',
-						'url':trips.at(trips.length-1).get('tripurl')
+						'url':latestTrip.get('tripurl'),
+						"tripname" : latestTrip.get('tripname'),
+						"firstname" : user.get('firstname'),
+						"lastname" : user.get('lastname')
 					});
 				})
 				.catch(function(error){
