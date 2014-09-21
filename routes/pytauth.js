@@ -151,6 +151,7 @@ module.exports = function(app,passport){
 						"status":'success',
 						'url':latestTrip.get('tripurl'),
 						"tripname" : latestTrip.get('tripname'),
+						"tripjson" : JSON.parse(latestTrip.get('jsondata')),
 						"firstname" : user.get('firstname'),
 						"lastname" : user.get('lastname')
 					});

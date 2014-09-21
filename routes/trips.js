@@ -1,3 +1,5 @@
+var TripParser = require("../utils/tripparser");
+
 module.exports = function(app) {
     var bookshelf = app.get('bookshelf');
 
@@ -79,19 +81,59 @@ module.exports = function(app) {
                     user_id: req.body.user_id,
                     timestamp: new Date()
                 });
-                trip.save().then(function(savedTrip) {
-                    res.redirect('/trips/list');
-                }).
-                catch (function(error) {
-                	var message;
-                	if(error.code == "ER_NO_REFERENCED_ROW_"){
-                		message = "UserId "+req.body.user_id+" does not exist"
-                	}
-					res.render('trips/create',{
-                    	'message' : message
+
+                var tripParser = new TripParser(req.body.tripurl);
+                tripParser.fetch(function(jsondata){
+
+                    trip.set('jsondata',JSON.stringify(jsondata));
+                    trip.save().then(function(savedTrip) {
+                        res.redirect('/trips/list');
+                    }).
+                    catch (function(error) {
+                        var message;
+                        if(error.code == "ER_NO_REFERENCED_ROW_"){
+                            message = "UserId "+req.body.user_id+" does not exist"
+                        }
+                        res.render('trips/create',{
+                            'message' : message
+                        });
                     });
-                })
+                });
             }
+        },
+        "refresh" : function(req, res){
+            var id = req.params.id;
+            new Trips({
+                id: id
+            }).fetch().then(function(model) {
+                
+                var tripurl = model.get('tripurl');
+                var tripParser = new TripParser(tripurl);
+                tripParser.fetch(function(jsondata){
+                    //jsondata = {"dummy":"funny"};
+                    model.set('jsondata',JSON.stringify(jsondata));
+                    model.save().then(function(savedTrip) {
+                        res.redirect('/trips/list');
+                    });
+                });    
+            });
+        },
+        "usertrips":function(req,resp){
+            var userid = req.params.id;
+            console.log("user id ", userid);
+            var trips = new Trips()
+                .where({"user_id":userid})
+                .fetchAll()
+                .then(function(trips) {
+                    console.log(trips.toJSON());
+                    resp.render('trips/list', {
+                        'records': trips.toJSON()
+                    })
+                }).
+            catch (function(error) {
+                console.log(error);
+                resp.render('trips/list', {});
+            });
         }
     }
 }

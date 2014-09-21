@@ -14,12 +14,24 @@ html(lang='en')
 					&nbsp;&nbsp;
 					a(href="/logout" style="font-size:14px") Log Out
 			ul.nav.nav-pills
-				li
-					a(href="/users/list") 
+				li(style='margin-left:-15px')
+					a(id="user-tab" href="/users/list") 
 						strong Users
 				li
-					a(href="/trips/list") 
+					a(id="trip-tab" href="/trips/list") 
 						strong Trips	
 			
 		#content
 			block content
+	script(src="/javascripts/sorttable.js")		
+	script(type='text/javascript').
+		var route = location.pathname.split("/")[1];
+		var userTab = document.getElementById('user-tab');
+		var tripTab = document.getElementById('trip-tab');
+		userTab.className="";
+		tripTab.className="";
+		if(route==="users"){
+			userTab.className += ' active';
+		}else{
+			tripTab.className += ' active';
+		}

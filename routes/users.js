@@ -59,7 +59,9 @@ module.exports = function(app) {
                     model.set('firstname', req.body.firstname);
                     model.set('lastname', req.body.lastname);
                     model.set('username', req.body.username);
-                    model.set('password', req.body.password);
+                    if(req.body.password){
+                        model.set('password', password);    
+                    }
                     model.set('phonenumber', req.body.phonenumber);
                     model.set('email', req.body.email);
 

@@ -46,3 +46,5 @@ CREATE TABLE `trips` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2014-08-03  0:51:43
+
+alter table trips modify jsondata varchar(150000);

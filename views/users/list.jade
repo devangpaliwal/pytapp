@@ -9,14 +9,13 @@ block content
 
 
 	form#list-form
-		table#list.table.table-condensed.table-hover.table-bordered.table-striped
+		table#list.table.table-condensed.table-hover.table-bordered.table-striped.sortable
 			thead
 				tr
 					th #
+					th User Name
 					th First Name
 					th Last Name
-					th Password
-					th User Name
 					th Phone Number
 					th Email
 					th Actions
@@ -26,10 +25,10 @@ block content
 					each rec in records
 						tr
 							td #{rec.id}
+							td 
+								a(href='/trips/usertrips/#{rec.id}') #{rec.username}
 							td #{rec.firstname}
 							td #{rec.lastname}
-							td #{rec.password}
-							td #{rec.username}
 							td #{rec.phonenumber}
 							td #{rec.email}
 							td

@@ -80,6 +80,8 @@ app.post('/users/save/:id?', routes.users.save);
 
 
 app.get('/trips/list', routes.trips.list);
+app.get('/trips/refresh/:id', routes.trips.refresh);
+app.get('/trips/usertrips/:id', routes.trips.usertrips);
 app.get('/trips/create', routes.trips.create);
 app.post('/trips/save/:id?', routes.trips.save);
 app.get('/trips/update/:id', routes.trips.update);
@@ -98,50 +100,10 @@ app.post('/ajax/gettripurl',routes.pytauth.gettripurl);
 app.post('/ajax/changepassajax',routes.pytauth.changepassajax);
 
 
-
-
-/*
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
- 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.use(new LocalStrategy(function(username, password, done) {
-  process.nextTick(function() {
-    	
-  		return done(null, false);
-    	// UserDetails.findOne({
-		   //    'username': username, 
-		   //  }, function(err, user) {
-		   //    if (err) {
-		   //      return done(err);
-		   //    }
-		 		
-		   //    if (!user) {
-		   //      return done(null, false);
-		   //    }
-		 
-		   //    if (user.password != password) {
-		   //      return done(null, false);
-		   //    }
-		 
-		   //    return done(null, user);
-    	// });
-  });
-}));
-
-*/
-
 app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.send(500, 'Something broke!');
 });
-
-
 
 var server = app.listen(3000, function() {
     console.log('Listening on port %d', server.address().port);
